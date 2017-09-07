@@ -57,6 +57,23 @@ if (process.env.NODE_ENV === 'production') {
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
     new BundleAnalyzerPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: function(module, count) {
+        return module.resource &&
+          /\.js$/.test(module.resource) &&
+          module.resource.includes('node_modules')
+      }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'app',
+      async: 'async',
+      minChunks: function(module, count) {
+        return module.resource &&
+          /\.js$/.test(module.resource) &&
+          module.resource.includes('node_modules')
+      }
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
