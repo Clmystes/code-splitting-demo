@@ -2,6 +2,9 @@
   <div id="app">
     <img src="./assets/logo.png">
     <h1>Code Splitting Demo</h1>
+    <router-link to='/one'>one</router-link>
+    <router-link to='/two'>two</router-link>
+    <router-view></router-view>
   </div>
 </template>
 
